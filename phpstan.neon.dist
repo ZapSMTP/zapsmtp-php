@@ -1,0 +1,10 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+    # the generated ClientServices trait sets the resource properties from the constructor
+    additionalConstructors:
+        - ZapSMTP\Client::initServices
+    # options and arguments are checked at runtime too, for callers without static analysis
+    treatPhpDocTypesAsCertain: false
