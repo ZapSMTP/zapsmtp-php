@@ -14,7 +14,7 @@ Using Laravel? Install [`zapsmtp/zapsmtp-laravel`](../laravel): a mail driver, w
 ## Install
 
 ```bash
-composer require zapsmtp/zapsmtp-php
+composer require "zapsmtp/zapsmtp-php:^0.1@beta"
 ```
 
 ## Send an email
