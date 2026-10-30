@@ -224,7 +224,8 @@ final class ClientTest extends TestCase
         self::assertMatchesRegularExpression('/^multipart\/form-data; boundary=\S+$/', $ct);
         self::assertStringContainsString('name="file"; filename="Logo"', $http->bodies[0]);
         self::assertStringContainsString("\x89PNG", $http->bodies[0]);
-        self::assertStringContainsString("name=\"name\"\r\nContent-Length: 4\r\n\r\nLogo", $http->bodies[0]);
+        // psr7 2 writes a Content-Length per part, psr7 3 does not
+        self::assertMatchesRegularExpression('/name="name"\r\n(Content-Length: 4\r\n)?\r\nLogo\r\n/', $http->bodies[0]);
 
         $zap->templateAssets->uploadFile("$dir/logo.png");
         self::assertStringContainsString('filename="logo.png"', $http->bodies[1]);
