@@ -26,7 +26,7 @@ final class StatsService extends BaseService
      * GET /stats
      *
      * Parameters:
-     * - hours: 1-720; out-of-range falls back to 24. Default: 24.
+     * - hours: 1-720. Limits: 422 invalid_parameter otherwise. Default: 24.
      *
      * @param array{hours?: int} $params
      * @param array{idempotency_key?: string, headers?: array<string, string>, timeout?: int|float, max_retries?: int} $options
@@ -46,8 +46,8 @@ final class StatsService extends BaseService
      * GET /stats/timeseries
      *
      * Parameters:
-     * - hours: 1-720; out-of-range falls back to 24. Bucket size: <=1h → 60 s, <=6h → 300 s, <=24h → 1800 s,
-     *   <=168h → 10800 s, otherwise 43200 s. Default: 24.
+     * - hours: 1-720 (422 invalid_parameter otherwise). Bucket size: <=1h → 60 s, <=6h → 300 s, <=24h → 1800
+     *   s, <=168h → 10800 s, otherwise 43200 s. Default: 24.
      *
      * @param array{hours?: int} $params
      * @param array{idempotency_key?: string, headers?: array<string, string>, timeout?: int|float, max_retries?: int} $options
@@ -68,7 +68,7 @@ final class StatsService extends BaseService
      * GET /stats/breakdown
      *
      * Parameters:
-     * - hours: 1-720; out-of-range falls back to 24. Default: 24.
+     * - hours: 1-720. Limits: 422 invalid_parameter otherwise. Default: 24.
      *
      * @param array{hours?: int} $params
      * @param array{idempotency_key?: string, headers?: array<string, string>, timeout?: int|float, max_retries?: int} $options

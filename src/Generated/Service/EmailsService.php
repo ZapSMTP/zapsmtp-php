@@ -137,21 +137,22 @@ final class EmailsService extends BaseService
      * GET /emails
      *
      * Parameters:
-     * - limit: 1-100; out-of-range values fall back to 20. Default: 20.
+     * - limit: 1-100. Limits: 422 invalid_parameter otherwise. Default: 20.
      * - before: Cursor: an email id (UUIDv7) or RFC 3339 time; returns emails accepted before it. An email id
      *   gives an exact page boundary. Limits: 422 invalid_parameter "before must be an email id or RFC 3339
      *   time"
      * - after: Email id or RFC 3339 time; only emails created after it (still newest first). Limits: 422
      *   invalid_parameter "after must be an email id or RFC 3339 time"
      * - status: Filter by latest status. status=scheduled lists pending scheduled sends instead (different
-     *   item shape, ordered by scheduled time ascending, has_more always false, other filters/cursors ignored).
-     *   One of: queued, delivered, delivery_delayed, bounced, complained, failed, opened, clicked, replied,
-     *   suppressed, scheduled.
+     *   item shape, ordered by scheduled time ascending, has_more always false, other filters/cursors ignored,
+     *   though they must be valid). One of: queued, delivered, delivery_delayed, bounced, complained, failed,
+     *   opened, clicked, replied, suppressed, scheduled.
      * - q: Case-insensitive substring of a recipient or subject, or an exact email id.
-     * - days: Look-back window in days, 1-90 (other values ignored). Always capped by the plan's log
-     *   retention. Default: 30.
+     * - days: Look-back window in days, 1-90. Always capped by the plan's log retention. Limits: 422
+     *   invalid_parameter otherwise. Default: 30.
      * - stream: One of: transactional, broadcast.
-     * - mode: Filter live or test-mode (sandbox) traffic; other values ignored. One of: live, test.
+     * - mode: Filter live or test-mode (sandbox) traffic. Limits: 422 invalid_parameter for other values. One
+     *   of: live, test.
      * - metadata: Exact match on a metadata value, e.g. metadata[order_id]=A-1042. Repeatable for several
      *   keys.
      *

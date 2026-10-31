@@ -110,6 +110,10 @@ final class Page implements \IteratorAggregate, \JsonSerializable
 
     public function jsonSerialize(): mixed
     {
-        return $this->raw;
+        // the items write their empty maps back as {} (see ApiObject::jsonSerialize)
+        $out = $this->raw;
+        $out['data'] = array_map(static fn (ApiObject $o): mixed => $o->jsonSerialize(), $this->data);
+
+        return $out;
     }
 }

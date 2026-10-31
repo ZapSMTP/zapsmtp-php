@@ -25,7 +25,7 @@ final class LogsService extends BaseService
      * GET /logs
      *
      * Parameters:
-     * - limit: 1–100. Default: 20.
+     * - limit: 1–100. Limits: 422 invalid_parameter otherwise. Default: 20.
      * - before: A log id: return older entries.
      * - after: A log id: return newer entries.
      * - status: An exact status (422) or a class: 2xx, 4xx, 5xx.

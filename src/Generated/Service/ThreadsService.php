@@ -25,13 +25,15 @@ final class ThreadsService extends BaseService
      * GET /threads
      *
      * Parameters:
-     * - limit: 1-100; out-of-range falls back to 20. Default: 20.
+     * - limit: 1-100. Limits: 422 invalid_parameter otherwise. Default: 20.
      * - before: Cursor: the last_message_at of the last conversation you have (RFC 3339). Limits: 422
      *   invalid_parameter otherwise.
      * - before_id: With before: the id of the last conversation you have, so conversations active at the same
      *   instant are neither skipped nor repeated.
-     * - awaiting_reply: true: only conversations whose last human email came in.
-     * - unread: true: only conversations with an email received after their read mark.
+     * - awaiting_reply: true: only conversations whose last human email came in. Limits: 422 invalid_parameter
+     *   unless true or false.
+     * - unread: true: only conversations with an email received after their read mark. Limits: 422
+     *   invalid_parameter unless true or false.
      * - participant: Only conversations this address took part in (case-insensitive).
      *
      * @param array{limit?: int, before?: string, before_id?: string, awaiting_reply?: bool, unread?: bool, participant?: string} $params

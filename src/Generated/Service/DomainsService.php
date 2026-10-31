@@ -158,7 +158,7 @@ final class DomainsService extends BaseService
      * GET /domains/{id}/dmarc
      *
      * Parameters:
-     * - days: 1-180; out-of-range falls back to 30. Default: 30.
+     * - days: 1-180. Limits: 422 invalid_parameter otherwise. Default: 30.
      *
      * @param string $id Domain id.
      * @param array{days?: int} $params

@@ -17,6 +17,7 @@ use ZapSMTP\ApiObject;
 final class SendBatchResponseData extends ApiObject
 {
     protected const FIELDS = [
+        'failed_recipients' => ['list', 'string'],
         'id' => 'string',
         'index' => 'int',
         'reply_to' => 'string',
@@ -24,6 +25,9 @@ final class SendBatchResponseData extends ApiObject
         'thread_id' => 'string',
         'unconfirmed' => 'bool',
     ];
+
+    /** @var list<string>|null */
+    public ?array $failed_recipients = null;
 
     public ?string $id = null;
 

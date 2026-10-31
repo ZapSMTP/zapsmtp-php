@@ -27,7 +27,7 @@ final class SuppressionsService extends BaseService
      * GET /suppressions
      *
      * Parameters:
-     * - limit: 1-1000; out-of-range falls back to 100. Default: 100.
+     * - limit: 1-1000. Limits: 422 invalid_parameter otherwise. Default: 100.
      * - after: Opaque cursor from next_cursor. Limits: 422 invalid_parameter "invalid after cursor"
      * - before: Legacy: RFC 3339 timestamp; returns entries created before it. Ignored when after is set.
      *   Limits: 422 invalid_parameter "before must be RFC3339"

@@ -68,9 +68,41 @@ abstract class ApiObject implements \ArrayAccess, \JsonSerializable
         return $this->rawValues;
     }
 
+    /**
+     * The JSON as received. Decoded PHP arrays cannot tell {} from []: a
+     * known map or object field that is empty is written back as {}.
+     */
     public function jsonSerialize(): mixed
     {
-        return $this->rawValues === [] ? new \stdClass() : $this->rawValues;
+        if ($this->rawValues === []) {
+            return new \stdClass();
+        }
+        $out = $this->rawValues;
+        foreach (static::FIELDS as $name => $type) {
+            if (\array_key_exists($name, $out)) {
+                $out[$name] = self::forJson($type, $out[$name]);
+            }
+        }
+
+        return $out;
+    }
+
+    private static function forJson(mixed $type, mixed $value): mixed
+    {
+        if (!\is_array($value)) {
+            return $value;
+        }
+        if (\is_string($type) && is_subclass_of($type, self::class)) {
+            return (new $type($value))->jsonSerialize();
+        }
+        if (!\is_array($type)) {
+            return $value; // mixed: as decoded
+        }
+        if ($type[0] === 'map' && $value === []) {
+            return new \stdClass();
+        }
+
+        return array_map(static fn (mixed $v): mixed => self::forJson($type[1], $v), $value);
     }
 
     public function offsetExists(mixed $offset): bool

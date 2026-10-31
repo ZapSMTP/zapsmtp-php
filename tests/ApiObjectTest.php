@@ -73,6 +73,13 @@ final class ApiObjectTest extends TestCase
         self::assertSame(['a' => 1], $e['extra']);
         self::assertSame('{"status":"ok","extra":{"a":1}}', json_encode($e));
         self::assertSame('{}', json_encode(new EmailEvent()));
+        // decoded arrays cannot tell {} from []: known maps and objects are written back as {}
+        $t = new \ZapSMTP\Model\Thread(['id' => 't', 'metadata' => [], 'last_message' => [], 'extra' => []]);
+        self::assertSame('{"id":"t","metadata":{},"last_message":{},"extra":[]}', json_encode($t));
+        $b = new \ZapSMTP\Model\Brand(['checks' => [[]], 'logo_fixed' => ['a'], 'dmarc' => 'x']);
+        self::assertSame('{"checks":[{}],"logo_fixed":["a"],"dmarc":"x"}', json_encode($b));
+        $v = new \ZapSMTP\Model\Template(['variables' => ['a' => []]]);
+        self::assertSame('{"variables":{"a":[]}}', json_encode($v)); // mixed: as decoded
         self::assertSame([], (new EmailEvent('not an object'))->toArray());
         /** @phpstan-ignore property.notFound (unknown fields read through __get) */
         self::assertNull($e->not_a_field);

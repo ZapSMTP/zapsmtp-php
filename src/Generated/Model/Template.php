@@ -34,7 +34,7 @@ final class Template extends ApiObject
         'updated_at' => 'string',
         'variable_names' => ['list', 'string'],
         'variable_schema' => ['list', TemplateVariableSchema::class],
-        'variables' => ['map', 'string'],
+        'variables' => ['map', 'mixed'],
     ];
 
     public ?string $alias = null;
@@ -74,6 +74,6 @@ final class Template extends ApiObject
     /** @var list<TemplateVariableSchema>|null */
     public ?array $variable_schema = null;
 
-    /** @var array<string, string>|null */
+    /** @var array<string, mixed>|null */
     public ?array $variables = null;
 }

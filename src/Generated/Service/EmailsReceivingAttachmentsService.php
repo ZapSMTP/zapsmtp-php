@@ -24,7 +24,7 @@ final class EmailsReceivingAttachmentsService extends BaseService
      * GET /emails/receiving/{id}/attachments
      *
      * Parameters:
-     * - limit: 1-100; when omitted or out of range all attachments are returned.
+     * - limit: 1-100; when omitted all attachments are returned. Limits: 422 invalid_parameter otherwise.
      * - after: Attachment id; returns attachments after it (ignored if unknown).
      * - before: Attachment id; returns attachments before it (used only when after is absent).
      *

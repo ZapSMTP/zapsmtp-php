@@ -36,7 +36,7 @@ final class EmailsReceivingService extends BaseService
      * GET /emails/receiving
      *
      * Parameters:
-     * - limit: 1-100; out-of-range falls back to 20. Default: 20.
+     * - limit: 1-100. Limits: 422 invalid_parameter otherwise. Default: 20.
      * - before: Cursor: an email id or RFC 3339 time; returns messages received before it. An email id gives
      *   an exact page boundary. Limits: 422 invalid_parameter "before must be an email id or RFC 3339 time"
      * - after: Email id or RFC 3339 time. Limits: 422 invalid_parameter "after must be an email id or RFC 3339
@@ -66,7 +66,9 @@ final class EmailsReceivingService extends BaseService
      * notification), out_of_office, auto_reply, auto_generated (notifications, null sender) or bulk (mailing
      * lists). Detected from Auto-Submitted, X-Autoreply, Precedence, List-Id, multipart/report and well-known
      * subjects; reason names the evidence. tls: the TLS version the sending server used (e.g. TLSv1_3); empty when
-     * the message was not encrypted.
+     * the message was not encrypted. A message refused at SMTP (status: rejected: spam or a reject route) is
+     * listed but its content was never kept: it returns the listing fields, with html, text and raw null and
+     * headers empty. Its attachments, redelivery, spam reports and replies are 404; DELETE erases it.
      *
      * GET /emails/receiving/{id}
      *
