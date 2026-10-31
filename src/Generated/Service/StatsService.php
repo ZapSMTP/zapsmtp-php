@@ -95,7 +95,8 @@ final class StatsService extends BaseService
      * Parameters:
      * - from: RFC 3339 start. At most 400 days before to. Default: 7 days ago.
      * - to: RFC 3339 end (exclusive). Default: now.
-     * - granularity: hour (ranges up to 31 days) or day for series. Default: hour up to 48 hours, else day.
+     * - granularity: hour (ranges up to 31 days) or day for series. One of: hour, day. Default: hour up to 48
+     *   hours, else day.
      * - dimension: domain, stream, tag or provider: adds groups, one row per value, busiest first.
      * - domain: Only this sending (From) domain.
      * - stream: transactional or broadcast.
