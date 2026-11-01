@@ -137,10 +137,11 @@ try {
 
 ## Retries and timeouts
 
-A request that failed on the way (429, 408, 5xx, a lost connection) is tried again twice by default,
+A request that failed on the way (408, 429, 500, 502, 503, 504, a lost connection) is tried again twice by default,
 waiting as the API's `Retry-After` says or backing off exponentially (0.5 s, 1 s, 2 s, ... up to 8 s,
 with jitter). Only requests that are safe to repeat are retried: reads, `PUT`, deletes, and sends,
-which always carry an `Idempotency-Key`. Pass your own key to make your own retries safe too; an empty
+which always carry an `Idempotency-Key`; other `POST` and `PATCH` requests only on 429. A 429 for a quota or
+`thread_reply_limit` is never retried; a 409 `idempotency_request_in_progress` is. Pass your own key to make your own retries safe too; an empty
 or blank key (as the option or as an `Idempotency-Key` header of any case) is refused with a
 `ValidationException` before sending, because the API does not deduplicate on it.
 

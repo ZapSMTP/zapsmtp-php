@@ -92,8 +92,9 @@ final class EmailsService extends BaseService
      *   value of the wrong type → 422 template_variables_invalid; a required variable without value or default →
      *   422 template_variables_missing; anything else the template uses still absent → 422 template_render_error
      *   "missing template variables: a, b"
-     * - tls: required or verified: deliver only over TLS (verified: with a valid certificate for the receiving
-     *   server). Raises the domain's policy, never lowers it.
+     * - tls: opportunistic, required or verified: required delivers only over TLS, verified only with a valid
+     *   certificate for the receiving server. The stricter of this and the domain’s policy applies: it raises
+     *   the domain’s policy, never lowers it.
      *
      * @param array{from?: string, to: string|list<string>, cc?: string|list<string>, bcc?: string|list<string>, reply_to?: string|list<string>, subject?: string, html?: string, text?: string, headers?: array<string, string>, attachments?: list<array{filename: string, content?: string, path?: string, content_type?: string, content_id?: string}>, tags?: list<array{name: string, value: string}>, scheduled_at?: string, metadata?: array<string, string>, stream?: string, tracking?: array{opens?: bool, clicks?: bool, replies?: bool}, template?: array{id: string, variables?: array<string, mixed>}, tls?: string} $params
      * @param array{idempotency_key?: string, headers?: array<string, string>, timeout?: int|float, max_retries?: int} $options

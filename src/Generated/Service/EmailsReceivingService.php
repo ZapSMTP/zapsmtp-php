@@ -205,9 +205,12 @@ final class EmailsReceivingService extends BaseService
      *   min|mins|minute|minutes|h|hour|hours|d|day|days. Times in the past send immediately. Limits: unparsable
      *   → 422 invalid_parameter; more than 7 days ahead → 422 invalid_parameter "scheduled_at must be within 7
      *   days"
+     * - tls: opportunistic, required or verified: required delivers only over TLS, verified only with a valid
+     *   certificate for the receiving server. The stricter of this and the domain’s policy applies: it raises
+     *   the domain’s policy, never lowers it.
      *
      * @param string $id Received email id
-     * @param array{text?: string, html?: string, from?: string, to?: string|list<string>, reply_all?: bool, allow_automated?: bool, auto_reply?: bool, cc?: string|list<string>, bcc?: string|list<string>, reply_to?: string|list<string>, subject?: string, headers?: array<string, string>, attachments?: list<array{filename: string, content?: string, path?: string, content_type?: string, content_id?: string}>, tags?: list<array{name: string, value: string}>, metadata?: array<string, string>, stream?: string, tracking?: array{opens?: bool, clicks?: bool, replies?: bool}, template?: array{id: string, variables?: array<string, mixed>}, scheduled_at?: string} $params
+     * @param array{text?: string, html?: string, from?: string, to?: string|list<string>, reply_all?: bool, allow_automated?: bool, auto_reply?: bool, cc?: string|list<string>, bcc?: string|list<string>, reply_to?: string|list<string>, subject?: string, headers?: array<string, string>, attachments?: list<array{filename: string, content?: string, path?: string, content_type?: string, content_id?: string}>, tags?: list<array{name: string, value: string}>, metadata?: array<string, string>, stream?: string, tracking?: array{opens?: bool, clicks?: bool, replies?: bool}, template?: array{id: string, variables?: array<string, mixed>}, scheduled_at?: string, tls?: string} $params
      * @param array{idempotency_key?: string, headers?: array<string, string>, timeout?: int|float, max_retries?: int} $options
      *
      * @throws \ZapSMTP\Exception\ZapSMTPException
