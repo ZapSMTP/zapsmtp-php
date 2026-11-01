@@ -29,6 +29,7 @@ trait ClientServices
     public readonly DedicatedIpsService $dedicatedIps;
     public readonly LogsService $logs;
     public readonly UsageService $usage;
+    public readonly AccountService $account;
     public readonly TemplateModulesService $templateModules;
     public readonly TemplateAssetsService $templateAssets;
     public readonly TemplateTimersService $templateTimers;
@@ -51,6 +52,7 @@ trait ClientServices
         $this->dedicatedIps = new DedicatedIpsService($transport);
         $this->logs = new LogsService($transport);
         $this->usage = new UsageService($transport);
+        $this->account = new AccountService($transport);
         $this->templateModules = new TemplateModulesService($transport);
         $this->templateAssets = new TemplateAssetsService($transport);
         $this->templateTimers = new TemplateTimersService($transport);

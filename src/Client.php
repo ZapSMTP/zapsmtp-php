@@ -31,7 +31,7 @@ class Client
     use ClientServices;
 
     /** This SDK's version. */
-    public const VERSION = '0.1.3';
+    public const VERSION = '0.1.4';
 
     public const DEFAULT_BASE_URL = 'https://api.zapsmtp.com/v1';
 

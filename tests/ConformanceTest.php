@@ -37,7 +37,7 @@ final class ConformanceTest extends TestCase
     {
         $ids = array_map(static fn (array $c): string => \is_string($c['id'] ?? null) ? $c['id'] : '', self::cases());
         self::assertCount(\count($ids), array_unique($ids));
-        self::assertGreaterThanOrEqual(112, \count($ids));
+        self::assertGreaterThanOrEqual(114, \count($ids));
     }
 
     /** @param array<string, mixed> $c */
