@@ -26,6 +26,17 @@ final class WebhookEvent extends ApiObject
     public const EMAIL_RECEIVED = 'email.received';
     public const THREAD_CREATED = 'thread.created';
     public const THREAD_REPLIED = 'thread.replied';
+    public const EMAIL_OPENED_UNIQUE = 'email.opened_unique';
+    public const EMAIL_CLICKED_UNIQUE = 'email.clicked_unique';
+    public const EMAIL_UNSUBSCRIBED = 'email.unsubscribed';
+    public const EMAIL_FORWARD_FAILED = 'email.forward_failed';
+    public const DOMAIN_VERIFIED = 'domain.verified';
+    public const DOMAIN_REPUTATION_CHANGED = 'domain.reputation_changed';
+    public const EMAIL_SCHEDULED = 'email.scheduled';
+    public const SUPPRESSION_ADDED = 'suppression.added';
+    public const SUPPRESSION_REMOVED = 'suppression.removed';
+    public const DOMAIN_CREATED = 'domain.created';
+    public const DOMAIN_DELETED = 'domain.deleted';
 
     protected const FIELDS = [
         'id' => 'string',

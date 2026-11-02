@@ -18,8 +18,12 @@ final class WebhookFilter extends ApiObject
 {
     protected const FIELDS = [
         'actions' => ['list', 'string'],
+        'domains' => ['list', 'string'],
     ];
 
     /** @var list<string>|null */
     public ?array $actions = null;
+
+    /** @var list<string>|null */
+    public ?array $domains = null;
 }
