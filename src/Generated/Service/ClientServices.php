@@ -35,6 +35,8 @@ trait ClientServices
     public readonly TemplateTimersService $templateTimers;
     public readonly ActionsService $actions;
     public readonly VariablesService $variables;
+    public readonly EmailValidationsService $emailValidations;
+    public readonly PlacementTestsService $placementTests;
 
     private function initServices(Transport $transport): void
     {
@@ -58,5 +60,7 @@ trait ClientServices
         $this->templateTimers = new TemplateTimersService($transport);
         $this->actions = new ActionsService($transport);
         $this->variables = new VariablesService($transport);
+        $this->emailValidations = new EmailValidationsService($transport);
+        $this->placementTests = new PlacementTestsService($transport);
     }
 }
